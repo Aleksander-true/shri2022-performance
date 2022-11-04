@@ -1,14 +1,9 @@
 const path = require("path");
-const glob = require("glob");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
-
-const PATHS = {
-  src: path.join(__dirname, "src"),
-};
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const devServer = (isDev) =>
   !isDev
@@ -53,15 +48,17 @@ module.exports = ({ development }) => ({
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
     ],
   },
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[contenthash].css",
-    }),
-    new PurgeCSSPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-    }),
+    new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
     new HtmlWebpackPlugin({ template: "./index.html" }),
     new CopyPlugin({
       patterns: [

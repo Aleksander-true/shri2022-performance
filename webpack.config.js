@@ -1,9 +1,14 @@
 const path = require("path");
+const glob = require("glob");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
+
+const PATHS = {
+  src: path.join(__dirname, "src"),
+};
 
 const devServer = (isDev) =>
   !isDev
@@ -48,14 +53,15 @@ module.exports = ({ development }) => ({
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
+    new MiniCssExtractPlugin({
+      filename: "[contenthash].css",
+    }),
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+    }),
     new HtmlWebpackPlugin({ template: "./index.html" }),
     new CopyPlugin({
       patterns: [
@@ -63,7 +69,7 @@ module.exports = ({ development }) => ({
           from: "**/*",
           context: path.resolve(__dirname, "./src"),
           globOptions: {
-            ignore: ["**/*.js", "**/*.ts", "**/index.html"],
+            ignore: ["**/*.js", "**/*.css", "**/index.html"],
           },
           noErrorOnMissing: true,
           force: true,

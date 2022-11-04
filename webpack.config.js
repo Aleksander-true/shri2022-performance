@@ -71,7 +71,6 @@ module.exports = ({ development }) => ({
       ],
     }),
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ["**/*"] }),
-    new ImageminWebpWebpackPlugin(),
   ],
   resolve: {
     extensions: [".js"],

@@ -284,7 +284,7 @@ body {
 
 @media (max-width: 425px) {
   .hero-dashboard {
-    background-image: url(assets/laptop.png);
+    background-image: url(assets/bg@laptop.png);
   }
 }
 
@@ -294,25 +294,25 @@ body {
     gap: 1.25rem;
     height: auto;
     margin-bottom: 0.3125rem;
-    background-image: url(assets/tablet.png);
+    background-image: url(assets/bg@tablet.png);
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
   .hero-dashboard {
-    background-image: url(assets/mob_L.png);
+    background-image: url(assets/bg@mob_L.png);
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 376px) {
   .hero-dashboard {
-    background-image: url(assets/mob_M.png);
+    background-image: url(assets/bg@mob_M.png);
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 321px) {
   .hero-dashboard {
-    background-image: url(assets/mob_S.png);
+    background-image: url(assets/bg@mob_S.png);
   }
 }
 

@@ -282,8 +282,9 @@ body {
   border-radius: 1.25rem;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 1025px) {
   .hero-dashboard {
+    background-size: cover;
     background-image: url(assets/bg@laptop.png);
   }
 }
@@ -300,19 +301,7 @@ body {
 
 @media (max-width: 426px) {
   .hero-dashboard {
-    background-image: url(assets/bg@mob_L.png);
-  }
-}
-
-@media (max-width: 376px) {
-  .hero-dashboard {
-    background-image: url(assets/bg@mob_M.png);
-  }
-}
-
-@media (max-width: 321px) {
-  .hero-dashboard {
-    background-image: url(assets/bg@mob_S.png);
+    background-image: url(assets/bg@mobile.png);
   }
 }
 

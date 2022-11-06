@@ -51,7 +51,7 @@ module.exports = ({ development }) => ({
     ],
   },
   optimization: {
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [new CssMinimizerPlugin(), "..."],
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "[contenthash].css" }),
